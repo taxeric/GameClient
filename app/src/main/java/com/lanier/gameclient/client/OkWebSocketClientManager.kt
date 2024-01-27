@@ -1,5 +1,7 @@
 package com.lanier.gameclient.client
 
+import com.lanier.gameclient.ext.collect
+import com.lanier.gameclient.message.WebSocketMessage
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -11,11 +13,25 @@ import java.util.concurrent.TimeUnit
  */
 object OkWebSocketClientManager {
 
+    init {
+        collect<WebSocketMessage> {
+            if (it.action == WebSocketMessage.MSG_ACTION_OPEN) {
+                isConnected = true
+            }
+            if (it.action == WebSocketMessage.MSG_ACTION_CLOSE) {
+                isConnected = false
+            }
+        }
+    }
+
     private val client: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .pingInterval(10, TimeUnit.SECONDS)
             .build()
     }
+
+    var isConnected : Boolean = false
+        private set
 
     private var webSocket: WebSocket? = null
 
