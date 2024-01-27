@@ -45,7 +45,26 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+    val okhttpBomVersion = "4.12.0"
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:$okhttpBomVersion"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+    //datastore
+    val datastoreVersion = "1.0.0"
+    implementation("androidx.datastore:datastore-preferences:$datastoreVersion")
+
+    //coroutine
+    val coroutineVersion = "1.7.1"
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+
+    //vm & lifecycle
+    val lifecycleVersion = "2.7.0"
+    val actKtxVersion = "1.8.2"
+    val fraKtxVersion = "1.6.2"
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("androidx.activity:activity-ktx:$actKtxVersion")
+    implementation("androidx.fragment:fragment-ktx:$fraKtxVersion")
 }
