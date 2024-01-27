@@ -1,4 +1,4 @@
-package com.lanier.gameclient
+package com.lanier.gameclient.client
 
 import com.lanier.gameclient.ext.post
 import com.lanier.gameclient.message.WebSocketMessage
@@ -11,7 +11,7 @@ import okio.ByteString
  * Created by 幻弦让叶
  * Date 2024/1/25 23:53
  */
-object OkWebSocketClient : WebSocketListener() {
+class OkWebSocketClientListener : WebSocketListener() {
 
     override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
         WebSocketMessage(
