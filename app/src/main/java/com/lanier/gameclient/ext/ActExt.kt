@@ -90,29 +90,6 @@ fun ComponentActivity.listenAllPreferences(
     }
 }
 
-fun Map<Preferences.Key<*>, Any>.getStringValue(
-    key: String,
-    def: String = ""
-) = getValue(key) ?: def
-
-fun Map<Preferences.Key<*>, Any>.getIntValue(
-    key: String,
-    def: Int = 0
-) = getValue(key) ?: def
-
-fun Map<Preferences.Key<*>, Any>.getBooleanValue(
-    key: String,
-    def: Boolean = false
-) = getValue(key) ?: def
-
-inline fun <reified T : Any> Map<Preferences.Key<*>, Any>.getValueOrDef(
-    key: String
-) = this[getPreferencesKey<T>(key)] as? T
-
-inline fun <reified T : Any> Map<Preferences.Key<*>, Any>.getValue(
-    key: String,
-) = this[getPreferencesKey<T>(key)] as? T
-
 fun ComponentActivity.readStringFromPreferences(
     key: String,
     def: String = "",

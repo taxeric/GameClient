@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import kotlinx.coroutines.flow.first
 
 /**
  * Created by 幻弦让叶
@@ -17,6 +16,25 @@ import kotlinx.coroutines.flow.first
 private const val DEFAULT_PREFERENCE_FILENAME = "def_preferences"
 
 val Context.mDefPreferenceStore: DataStore<Preferences> by preferencesDataStore(name = DEFAULT_PREFERENCE_FILENAME)
+
+fun Map<Preferences.Key<*>, Any>.getStringValue(
+    key: String,
+    def: String = ""
+) = getValue(key) ?: def
+
+fun Map<Preferences.Key<*>, Any>.getIntValue(
+    key: String,
+    def: Int = 0
+) = getValue(key) ?: def
+
+fun Map<Preferences.Key<*>, Any>.getBooleanValue(
+    key: String,
+    def: Boolean = false
+) = getValue(key) ?: def
+
+inline fun <reified T : Any> Map<Preferences.Key<*>, Any>.getValue(
+    key: String,
+) = this[getPreferencesKey<T>(key)] as? T
 
 fun getStringKey(key: String) = stringPreferencesKey(key)
 fun getIntKey(key: String) = intPreferencesKey(key)
