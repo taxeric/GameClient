@@ -60,8 +60,8 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
 
     //vm & lifecycle
-    val lifecycleVersion = "2.7.0"
-    val actKtxVersion = "1.8.2"
+    val lifecycleVersion = "2.6.2"
+    val actKtxVersion = "1.7.2"
     val fraKtxVersion = "1.6.2"
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
