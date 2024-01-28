@@ -20,8 +20,6 @@ object FlowBus {
     private fun <T> with(key: String): MutableSharedFlow<T> {
         if (!events.containsKey(key)) {
             events[key] = MutableSharedFlow(0, 1, BufferOverflow.DROP_OLDEST)
-        } else {
-            events[key] = MutableSharedFlow(0, 1, BufferOverflow.DROP_OLDEST)
         }
         return events[key] as MutableSharedFlow<T>
     }
@@ -30,14 +28,19 @@ object FlowBus {
      * 发送
      */
     fun <T> post(key: String, value: T) {
+        println(">>>> post $key $value")
         with<T>(key).tryEmit(value)
     }
 
     /**
      * 接收
      */
-    suspend fun <T> collect(key: String, action: suspend (T) -> Unit){
+    suspend fun <T> collectLatest(key: String, action: suspend (T) -> Unit){
         with<T>(key).collectLatest(action)
+    }
+
+    suspend fun <T> collect(key: String, action: suspend (T) -> Unit){
+        with<T>(key).collect(action)
     }
 
     fun <T> each(key: String, action: (T) -> Unit) {

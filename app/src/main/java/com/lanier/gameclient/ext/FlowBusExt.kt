@@ -18,10 +18,18 @@ fun <T> T.post(key: String, value: T) {
     FlowBus.post(key, value)
 }
 
-inline fun <reified T> collect(
+inline fun <reified T> each(
     crossinline action: (T) -> Unit
 ) {
     FlowBus.each<T>(T::class.java.simpleName) {
+        action.invoke(it)
+    }
+}
+
+suspend inline fun <reified T> collect(
+    crossinline action: (T) -> Unit
+) {
+    FlowBus.collect<T>(T::class.java.simpleName) {
         action.invoke(it)
     }
 }
