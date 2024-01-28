@@ -21,6 +21,9 @@ object OkWebSocketClientManager {
             if (it.action == WebSocketMessage.MSG_ACTION_CLOSE) {
                 isConnected = false
             }
+            if (it.action == WebSocketMessage.MSG_ACTION_REQUEST_LINK) {
+                newWebSocket(it.text!!)
+            }
         }
     }
 
@@ -30,16 +33,23 @@ object OkWebSocketClientManager {
             .build()
     }
 
+    private val clientListener: OkWebSocketClientListener by lazy {
+        OkWebSocketClientListener()
+    }
+
     var isConnected : Boolean = false
         private set
 
     private var webSocket: WebSocket? = null
 
     fun newWebSocket(url: String) {
+        if (webSocket != null) {
+            close()
+        }
         val request = Request.Builder()
             .url(url)
             .build()
-        webSocket = client.newWebSocket(request, OkWebSocketClientListener())
+        webSocket = client.newWebSocket(request, clientListener)
     }
 
     fun send(message: String) {

@@ -9,7 +9,7 @@ import androidx.annotation.IntDef
 @IntDef(
     WebSocketMessage.MSG_ACTION_NONE,
     WebSocketMessage.MSG_ACTION_OPEN,
-    WebSocketMessage.MSG_ACTION_CONNECTING,
     WebSocketMessage.MSG_ACTION_CLOSE,
+    WebSocketMessage.MSG_ACTION_REQUEST_LINK,
 )
 annotation class MessageAction()

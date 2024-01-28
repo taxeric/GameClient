@@ -17,7 +17,8 @@ data class WebSocketMessage(
 
         const val MSG_ACTION_NONE = 0
         const val MSG_ACTION_CLOSE = 1
-        const val MSG_ACTION_CONNECTING = 2
-        const val MSG_ACTION_OPEN = 3
+        const val MSG_ACTION_OPEN = 2
+
+        const val MSG_ACTION_REQUEST_LINK = 99
     }
 }
