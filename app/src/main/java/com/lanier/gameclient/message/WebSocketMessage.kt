@@ -7,6 +7,7 @@ package com.lanier.gameclient.message
 data class WebSocketMessage(
     @MessageType val type: String = MSG_TYPE_COMMON,
     @MessageAction val action: Int = MSG_ACTION_NONE,
+    val def: Boolean = false,
     val text: String? = null,
 ) {
 
@@ -20,5 +21,7 @@ data class WebSocketMessage(
         const val MSG_ACTION_OPEN = 2
 
         const val MSG_ACTION_REQUEST_LINK = 99
+
+        val DEF = WebSocketMessage(def = true)
     }
 }

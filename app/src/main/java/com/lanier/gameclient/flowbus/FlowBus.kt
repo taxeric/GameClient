@@ -28,7 +28,6 @@ object FlowBus {
      * 发送
      */
     fun <T> post(key: String, value: T) {
-        println(">>>> post $key $value")
         with<T>(key).tryEmit(value)
     }
 

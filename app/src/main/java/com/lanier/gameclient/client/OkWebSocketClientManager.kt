@@ -3,6 +3,9 @@ package com.lanier.gameclient.client
 import com.lanier.gameclient.ext.collect
 import com.lanier.gameclient.message.WebSocketMessage
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -20,12 +23,19 @@ object OkWebSocketClientManager {
             collect<WebSocketMessage> {
                 if (it.action == WebSocketMessage.MSG_ACTION_OPEN) {
                     isConnected = true
+                    _currentUrl.tryEmit(currentUrl)
+                    _isConnected.tryEmit(true)
                 }
                 if (it.action == WebSocketMessage.MSG_ACTION_CLOSE) {
                     isConnected = false
+                    _currentUrl.tryEmit("")
+                    _isConnected.tryEmit(false)
                 }
                 if (it.action == WebSocketMessage.MSG_ACTION_REQUEST_LINK) {
                     newWebSocket(it.text!!)
+                }
+                if (it.action == WebSocketMessage.MSG_ACTION_NONE) {
+                    _pushMessage.tryEmit(it)
                 }
             }
         }
@@ -45,6 +55,15 @@ object OkWebSocketClientManager {
         private set
     var currentUrl : String = ""
         private set
+
+    private val _isConnected = MutableStateFlow(false)
+    val isConnectedFlow : StateFlow<Boolean> = _isConnected.asStateFlow()
+
+    private val _currentUrl = MutableStateFlow("")
+    val currentUrlFlow : StateFlow<String> = _currentUrl.asStateFlow()
+
+    private val _pushMessage = MutableStateFlow(WebSocketMessage.DEF)
+    val pushMessageFlow : StateFlow<WebSocketMessage> = _pushMessage.asStateFlow()
 
     private var webSocket: WebSocket? = null
 
