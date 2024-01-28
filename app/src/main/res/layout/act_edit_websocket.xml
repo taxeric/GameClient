@@ -5,16 +5,19 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/etWBUrl"
         android:hint="url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <CheckBox
+        android:id="@+id/cbSave"
         android:text="save and auto link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/btnLink"
         android:text="link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".module.main.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/tvStatus"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/editAct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="edit" />
+
+    <Button
+        android:id="@+id/link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="link" />
+
+    <Button
+        android:id="@+id/mock1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模拟管理后台发送普通消息" />
+
+    <Button
+        android:id="@+id/mock2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模拟管理后台发送系统消息" />
+
+    <TextView
+        android:text="👇"
+        android:gravity="center"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvPush"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
