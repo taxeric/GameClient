@@ -6,46 +6,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".module.main.MainActivity">
-
-    <TextView
-        android:id="@+id/tvStatus"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/editAct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="edit" />
-
-    <Button
-        android:id="@+id/link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="link" />
-
-    <Button
-        android:id="@+id/mock1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="模拟管理后台发送普通消息" />
-
-    <Button
-        android:id="@+id/mock2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="模拟管理后台发送系统消息" />
-
-    <TextView
-        android:text="👇"
-        android:gravity="center"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tvPush"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

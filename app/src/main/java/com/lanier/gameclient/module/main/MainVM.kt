@@ -1,10 +1,7 @@
 package com.lanier.gameclient.module.main
 
 import androidx.lifecycle.ViewModel
-import com.lanier.gameclient.ext.launchSafe
-import com.lanier.gameclient.net.APIHelper
-import okhttp3.FormBody
-import kotlin.random.Random
+import com.lanier.gameclient.client.OkWebSocketClientManager
 
 /**
  * Created by 幻弦让叶
@@ -12,29 +9,14 @@ import kotlin.random.Random
  */
 class MainVM : ViewModel() {
 
-    fun mock1() {
-        launchSafe {
-            val body = FormBody.Builder()
-                .add("msg", "后端下发数据 - 推送消息 - 随机数 ${Random.nextInt(128)}")
-                .build()
-            val response = APIHelper.request(
-                url = "http://localhost:8080/push/send",
-                method = "POST",
-                body = body
-            )
+    private fun link(cacheUrl: String) {
+        var mUrl = ""
+        if (cacheUrl.isEmpty()) {
+            mUrl = OkWebSocketClientManager.currentUrl
+            if (mUrl.isEmpty()) {
+                return
+            }
         }
-    }
-
-    fun mock2() {
-        launchSafe {
-            val body = FormBody.Builder()
-                .add("type", "后端下发数据 - 推送消息 - 系统消息 恭喜获得【圣龙阿布 100级】")
-                .build()
-            val response = APIHelper.request(
-                url = "http://localhost:8080/push/send/type",
-                method = "POST",
-                body = body
-            )
-        }
+        OkWebSocketClientManager.newWebSocket(mUrl)
     }
 }
