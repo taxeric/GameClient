@@ -67,4 +67,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-ktx:$actKtxVersion")
     implementation("androidx.fragment:fragment-ktx:$fraKtxVersion")
+
+    val jacksonVersion = "2.16.1"
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 }
