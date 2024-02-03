@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".BaseApp"
@@ -17,17 +17,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".module.wsedit.WBEditAct"
-            android:exported="false" />
-        <activity
-            android:name=".module.main.MainActivity"
-            android:exported="true">
+            android:name=".module.login.LoginAct"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".module.wsedit.WBEditAct"
+            android:exported="false" />
+        <activity
+            android:name=".module.main.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
