@@ -26,6 +26,11 @@ android {
             )
         }
     }
+
+    dataBinding {
+        enable = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -49,6 +54,10 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:$okhttpBomVersion"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+// https://mvnrepository.com/artifact/com.github.florent37/ViewAnimator
+    implementation("com.github.florent37:ViewAnimator:1.1.2")
+
 
     //datastore
     val datastoreVersion = "1.0.0"
