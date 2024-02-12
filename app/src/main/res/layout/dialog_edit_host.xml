@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_corner_12_top"
+        android:orientation="vertical"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/cat1" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etHost"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/btnSave"
+                android:layout_marginHorizontal="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/shape_login_edit_text"
+                android:ellipsize="none"
+                android:hint="host"
+                android:maxLines="1"
+                android:paddingHorizontal="12dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnSave"
+                android:layout_centerVertical="true"
+                android:src="@drawable/baseline_check_24"
+                android:layout_marginEnd="12dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/save" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

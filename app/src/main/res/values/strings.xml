@@ -3,6 +3,8 @@
 
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="back">返回</string>
+    <string name="save">保存</string>
     <string name="login_account_hint">账号</string>
     <string name="login_password_hint">密码</string>
 </resources>

@@ -2,6 +2,7 @@ package com.lanier.gameclient.ext
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 
 /**
  * Created by 幻弦让叶
@@ -14,4 +15,8 @@ inline fun <reified T> Context.startAct(
         action.invoke(this)
     }
     startActivity(intent)
+}
+
+fun Context.toast(msg: String) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
