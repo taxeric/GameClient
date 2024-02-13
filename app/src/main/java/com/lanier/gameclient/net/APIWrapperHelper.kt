@@ -1,5 +1,7 @@
 package com.lanier.gameclient.net
 
+import com.fasterxml.jackson.databind.JavaType
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.lanier.gameclient.entity.BaseEntity
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +19,7 @@ object APIWrapperHelper {
             url,
             onSuccess = { json ->
                 val jacksonMapper = jacksonObjectMapper()
-                val type = jacksonMapper.typeFactory.constructParametricType(BaseEntity::class.java, T::class.java)
-                val mData = jacksonMapper.readValue<BaseEntity<T>>(json, type)
+                val mData = jacksonMapper.readValue<BaseEntity<T>>(json, combineType<T>(jacksonMapper))
                 val result = mData.data
                 onSuccess.invoke(result)
             },
@@ -37,8 +38,7 @@ object APIWrapperHelper {
             body,
             onSuccess = { json ->
                 val jacksonMapper = jacksonObjectMapper()
-                val type = jacksonMapper.typeFactory.constructParametricType(BaseEntity::class.java, T::class.java)
-                val mData = jacksonMapper.readValue<BaseEntity<T>>(json, type)
+                val mData = jacksonMapper.readValue<BaseEntity<T>>(json, combineType<T>(jacksonMapper))
                 if (mData.code == BaseEntity.CODE_SUCCESS) {
                     val result = mData.data
                     onSuccess.invoke(result)
@@ -58,8 +58,7 @@ object APIWrapperHelper {
     ): T? {
         val json = withContext(Dispatchers.IO) { APIHelper.getSyncNotHandle(url) }
         val jacksonMapper = jacksonObjectMapper()
-        val type = jacksonMapper.typeFactory.constructParametricType(BaseEntity::class.java, T::class.java)
-        val mData = jacksonMapper.readValue<BaseEntity<T>>(json, type)
+        val mData = jacksonMapper.readValue<BaseEntity<T>>(json, combineType<T>(jacksonMapper))
         if (mData.code != BaseEntity.CODE_SUCCESS) {
             onFailure?.invoke(mData.message)
             return null
@@ -74,12 +73,27 @@ object APIWrapperHelper {
     ): T? {
         val json = withContext(Dispatchers.IO) { APIHelper.postSyncNotHandle(url, requestBody) }
         val jacksonMapper = jacksonObjectMapper()
-        val type = jacksonMapper.typeFactory.constructParametricType(BaseEntity::class.java, T::class.java)
-        val mData = jacksonMapper.readValue<BaseEntity<T>>(json, type)
+        val mData = jacksonMapper.readValue<BaseEntity<T>>(json, combineType<T>(jacksonMapper))
         if (mData.code != BaseEntity.CODE_SUCCESS) {
             onFailure?.invoke(mData.message)
             return null
         }
         return mData.data
+    }
+
+    suspend inline fun <reified T> postSync(
+        url: String,
+        requestBody: RequestBody? = null,
+    ): BaseEntity<T> {
+        val json = withContext(Dispatchers.IO) { APIHelper.postSyncNotHandle(url, requestBody) }
+        val jacksonMapper = jacksonObjectMapper()
+        return jacksonMapper.readValue(json, combineType<T>(jacksonMapper))
+    }
+
+    inline fun <reified T> combineType(jacksonMapper: ObjectMapper): JavaType {
+        return jacksonMapper.typeFactory.constructParametricType(
+            BaseEntity::class.java,
+            T::class.java
+        )
     }
 }
