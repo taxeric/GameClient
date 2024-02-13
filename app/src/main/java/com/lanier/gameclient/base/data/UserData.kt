@@ -15,6 +15,9 @@ object UserData {
 
     val pets : MutableList<Pet> = mutableListOf()
 
+    val emptyPets: Boolean
+        get() = pets.isEmpty()
+
     var curPet: Pet = Pet.def
         private set
 

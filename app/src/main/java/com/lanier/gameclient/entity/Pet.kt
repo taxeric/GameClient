@@ -21,4 +21,6 @@ data class Pet(
         @JvmStatic
         val def = Pet(def = true)
     }
+
+    var selected = false
 }
