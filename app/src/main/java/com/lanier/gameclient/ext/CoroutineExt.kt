@@ -20,7 +20,9 @@ fun LifecycleOwner.launchSafe(
     block: suspend CoroutineScope.() -> Unit,
 ) {
     lifecycleScope.launch(
-        context = Dispatchers.Main + CoroutineExceptionHandler { _, throwable -> error?.invoke(throwable) },
+        context = Dispatchers.Main + CoroutineExceptionHandler { _, throwable ->
+            error?.invoke(throwable)
+        },
         start = start,
     ) {
         block.invoke(this)
@@ -33,7 +35,9 @@ fun CoroutineScope.launchSafe(
     block: suspend CoroutineScope.() -> Unit,
 ) {
     launch(
-        context = Dispatchers.Main + CoroutineExceptionHandler { _, throwable -> error?.invoke(throwable) },
+        context = Dispatchers.Main + CoroutineExceptionHandler { _, throwable ->
+            error?.invoke(throwable)
+        },
         start = start,
     ) {
         block.invoke(this)
@@ -46,9 +50,31 @@ fun ViewModel.launchSafe(
     block: suspend CoroutineScope.() -> Unit,
 ) {
     viewModelScope.launch(
-        context = Dispatchers.Main + CoroutineExceptionHandler { _, throwable -> error?.invoke(throwable) },
+        context = Dispatchers.Main + CoroutineExceptionHandler { _, throwable ->
+            error?.invoke(throwable)
+        },
         start = start,
     ) {
         block.invoke(this)
     }
 }
+
+fun ViewModel.launchIOSafe(
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    error: ((Throwable) -> Unit)? = null,
+    block: suspend CoroutineScope.() -> Unit,
+) {
+    viewModelScope.launchIOSafe(start, error, block)
+}
+
+fun CoroutineScope.launchIOSafe(
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    error: ((Throwable) -> Unit)? = null,
+    block: suspend CoroutineScope.() -> Unit
+) = launch(
+    context = Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
+        error?.invoke(throwable)
+    },
+    start = start,
+    block = block
+)
