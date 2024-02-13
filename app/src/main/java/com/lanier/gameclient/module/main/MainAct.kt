@@ -10,7 +10,7 @@ import com.lanier.gameclient.ext.listenAllPreferences
 import com.lanier.gameclient.preference.getBooleanValue
 import com.lanier.gameclient.preference.getStringValue
 
-class MainActivity : AppCompatActivity() {
+class MainAct : AppCompatActivity() {
 
     private var cacheUrl = ""
     private var isChecked = false

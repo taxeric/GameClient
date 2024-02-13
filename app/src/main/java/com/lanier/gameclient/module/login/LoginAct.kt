@@ -4,6 +4,7 @@ import androidx.activity.viewModels
 import com.github.florent37.viewanimator.ViewAnimator
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseAct
+import com.lanier.gameclient.base.data.UserData
 import com.lanier.gameclient.databinding.ActivityLoginBinding
 import com.lanier.gameclient.ext.invisible
 import com.lanier.gameclient.ext.listenAllPreferences
@@ -11,9 +12,12 @@ import com.lanier.gameclient.ext.saveToPreferences
 import com.lanier.gameclient.ext.startAct
 import com.lanier.gameclient.ext.toast
 import com.lanier.gameclient.ext.visible
+import com.lanier.gameclient.module.choose_pet.ChoosePetAct
 import com.lanier.gameclient.module.dialog.BSDFEditHost
+import com.lanier.gameclient.module.edit_pet.EditPetAct
 import com.lanier.gameclient.module.register.RegisterAct
 import com.lanier.gameclient.net.API
+import com.lanier.gameclient.preference.PreferenceKey
 import com.lanier.gameclient.preference.getIntKey
 import com.lanier.gameclient.preference.getStringKey
 import com.lanier.gameclient.preference.getStringValue
@@ -36,9 +40,15 @@ class LoginAct(
             vm.login(
                 onSuccess = { user ->
                     saveToPreferences {
-                        it[getIntKey("mUid")] = user.userId
-                        it[getStringKey("mAccount")] = user.account
+                        it[getIntKey(PreferenceKey.uid)] = user.userId
+                        it[getStringKey(PreferenceKey.account)] = user.account
                     }
+                    if (UserData.emptyPets) {
+                        startAct<EditPetAct> {  }
+                    } else {
+                        startAct<ChoosePetAct> {  }
+                    }
+                    finish()
                 },
                 onFailure = {
                     toast(it?:"未知错误")
@@ -62,7 +72,7 @@ class LoginAct(
         }
 
         listenAllPreferences {
-            val url = it.getStringValue("baseUrl")
+            val url = it.getStringValue(PreferenceKey.baseUrl)
             if (url.isEmpty()) {
                 tipsViewEnterAnim()
             } else {
@@ -82,7 +92,7 @@ class LoginAct(
     private fun showModifyDialog(withCatAnim: Boolean = true) {
         BSDFEditHost.show(supportFragmentManager, API.requestHostUrl) {
             if (it.isNotEmpty()) {
-                saveToPreferences("baseUrl", it)
+                saveToPreferences(PreferenceKey.baseUrl, it)
                 if (withCatAnim) {
                     tipsViewExitAnim()
                 }
