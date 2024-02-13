@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.lanier.gameclient.module.edit_pet.EditPetVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".module.edit_pet.EditPetAct">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivEgg"
+            android:src="@drawable/baseline_check_24"
+            android:layout_marginTop="72dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="256dp"
+            android:layout_height="256dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etSetNicknameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginHorizontal="36dp"
+            app:startIconDrawable="@drawable/baseline_edit_24"
+            app:layout_constraintTop_toBottomOf="@+id/ivEgg">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewmodel.nickname}"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:maxLength="10"
+                android:paddingHorizontal="12dp"
+                android:hint="@string/set_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOK"
+            android:text="@string/lets_start"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="36dp"
+            app:layout_constraintTop_toBottomOf="@+id/etSetNicknameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

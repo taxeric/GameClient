@@ -8,4 +8,7 @@
     <string name="login_account_hint">账号</string>
     <string name="login_password_hint">密码</string>
     <string name="choose_pet_completed">就决定是你啦！</string>
+    <string name="set_nickname">起个名字吧</string>
+    <string name="lets_start">Let\'s start ! </string>
+    <string name="OK">OK !</string>
 </resources>

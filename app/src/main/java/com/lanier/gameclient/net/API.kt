@@ -13,4 +13,6 @@ object API {
     const val USER_LOGIN = "/user/login"
     const val USER_REGISTER = "/user/register"
     const val USER_GET_INFO = "/user/getInfo"
+
+    const val PET_CREATE = "/pet/create"
 }
