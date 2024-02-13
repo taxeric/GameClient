@@ -22,50 +22,59 @@
             android:layout_width="64dp"
             android:layout_height="64dp" />
 
-        <EditText
-            android:id="@+id/etAccount"
-            android:text="@={viewmodel.inputAccount}"
-            android:textSize="12sp"
-            android:hint="@string/login_account_hint"
-            android:maxLines="1"
-            android:ellipsize="none"
-            android:maxLength="15"
-            android:paddingHorizontal="12dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etAccountLayout"
             android:layout_marginTop="48dp"
             android:layout_marginHorizontal="24dp"
             app:layout_constraintTop_toBottomOf="@+id/appIcon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/shape_login_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="42dp" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:text="@={viewmodel.inputPassword}"
-            android:textSize="12sp"
-            android:hint="@string/login_password_hint"
-            android:maxLines="1"
-            android:ellipsize="none"
-            android:maxLength="20"
-            android:inputType="textPassword"
-            android:paddingHorizontal="12dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewmodel.inputAccount}"
+                android:textSize="12sp"
+                android:hint="@string/login_account_hint"
+                android:maxLines="1"
+                android:ellipsize="none"
+                android:maxLength="15"
+                android:paddingHorizontal="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPasswordLayout"
+            app:passwordToggleEnabled="true"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/etAccount"
-            app:layout_constraintStart_toStartOf="@id/etAccount"
-            app:layout_constraintEnd_toEndOf="@+id/etAccount"
-            android:background="@drawable/shape_login_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/etAccountLayout"
+            app:layout_constraintStart_toStartOf="@id/etAccountLayout"
+            app:layout_constraintEnd_toEndOf="@+id/etAccountLayout"
             android:layout_width="0dp"
-            android:layout_height="42dp" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewmodel.inputPassword}"
+                android:textSize="12sp"
+                android:hint="@string/login_password_hint"
+                android:maxLines="1"
+                android:ellipsize="none"
+                android:maxLength="20"
+                android:inputType="textPassword"
+                android:paddingHorizontal="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnRegister"
             android:text="@string/register"
             android:textSize="12sp"
             android:layout_marginTop="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword"
-            app:layout_constraintStart_toStartOf="@id/etAccount"
-            app:layout_constraintEnd_toEndOf="@+id/etAccount"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordLayout"
+            app:layout_constraintStart_toStartOf="@id/etAccountLayout"
+            app:layout_constraintEnd_toEndOf="@+id/etAccountLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
@@ -78,8 +87,8 @@
             android:paddingVertical="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/btnRegister"
-            app:layout_constraintStart_toStartOf="@id/etAccount"
-            app:layout_constraintEnd_toEndOf="@+id/etAccount"
+            app:layout_constraintStart_toStartOf="@id/etAccountLayout"
+            app:layout_constraintEnd_toEndOf="@+id/etAccountLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
