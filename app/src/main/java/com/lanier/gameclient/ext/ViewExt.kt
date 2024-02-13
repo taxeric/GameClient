@@ -13,3 +13,11 @@ fun View.invisible() {
 fun View.gone() {
     visibility = View.GONE
 }
+
+fun View.enabled() {
+    isEnabled = true
+}
+
+fun View.disabled() {
+    isEnabled = false
+}
