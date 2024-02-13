@@ -14,6 +14,8 @@ import com.lanier.gameclient.ext.visible
 import com.lanier.gameclient.module.dialog.BSDFEditHost
 import com.lanier.gameclient.module.register.RegisterAct
 import com.lanier.gameclient.net.API
+import com.lanier.gameclient.preference.getIntKey
+import com.lanier.gameclient.preference.getStringKey
 import com.lanier.gameclient.preference.getStringValue
 import com.lanier.gameclient.utils.cube.LocalDisplay
 
@@ -31,7 +33,17 @@ class LoginAct(
         viewbinding.viewmodel = vm
 
         viewbinding.btnLogin.setOnClickListener {
-            vm.login()
+            vm.login(
+                onSuccess = { user ->
+                    saveToPreferences {
+                        it[getIntKey("mUid")] = user.userId
+                        it[getStringKey("mAccount")] = user.account
+                    }
+                },
+                onFailure = {
+                    toast(it?:"未知错误")
+                }
+            )
         }
         viewbinding.ivTips.setOnClickListener {
             showModifyDialog()
@@ -43,7 +55,7 @@ class LoginAct(
             showModifyDialog(false)
         }
 
-        vm.error.observe(this) {
+        vm.checkError.observe(this) {
             if (it.isNotEmpty()) {
                 toast(it)
             }
