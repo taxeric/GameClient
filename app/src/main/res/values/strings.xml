@@ -11,4 +11,10 @@
     <string name="set_nickname">起个名字吧</string>
     <string name="lets_start">Let\'s start ! </string>
     <string name="OK">OK !</string>
+    <string name="shop">商店</string>
+    <string name="food">食物</string>
+    <string name="toiletries">洗浴用品</string>
+    <string name="drug">药品</string>
+    <string name="seed">种子</string>
+    <string name="fertilizer">肥料</string>
 </resources>
