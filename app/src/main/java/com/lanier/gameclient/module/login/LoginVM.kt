@@ -23,7 +23,9 @@ class LoginVM : ViewModel() {
         if (checkPassed().not()) {
             return
         }
-        launchSafe {
+        launchSafe(
+            error = {onFailure.invoke(it.message)}
+        ) {
             val requestBody = FormBody.Builder()
                 .add("account", inputAccount.value!!)
                 .add("password", inputPassword.value!!)

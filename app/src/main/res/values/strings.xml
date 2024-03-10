@@ -17,4 +17,6 @@
     <string name="drug">药品</string>
     <string name="seed">种子</string>
     <string name="fertilizer">肥料</string>
+    <string name="purchase">购买</string>
+    <string name="purchase_number">购买数量</string>
 </resources>

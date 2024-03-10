@@ -58,6 +58,7 @@ dependencies {
 // https://mvnrepository.com/artifact/com.github.florent37/ViewAnimator
     implementation("com.github.florent37:ViewAnimator:1.1.2")
 
+    implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14")
 
     //datastore
     val datastoreVersion = "1.0.0"

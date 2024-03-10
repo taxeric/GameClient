@@ -4,7 +4,7 @@ package org.lanier.gameserve2.entity
  * Created by 黄瓜
  * Date 2024/2/14 17:36
  */
-data class Crop(
+data class Seed(
     val cropId: Int = 0,
 
     val type: Int = 1,

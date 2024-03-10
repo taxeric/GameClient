@@ -1,9 +1,9 @@
 package com.lanier.gameclient
 
 import android.app.Application
-import com.lanier.gameclient.base.OnActivityListener
+import com.lanier.gameclient.base.ActivityLifecycleListener
+import com.lanier.gameclient.base.ActivityManager
 import com.lanier.gameclient.client.OkWebSocketClientManager
-import com.lanier.gameclient.net.APIHelper
 import com.lanier.gameclient.utils.Cube
 
 /**
@@ -14,7 +14,7 @@ class BaseApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        registerActivityLifecycleCallbacks(OnActivityListener())
+        ActivityManager.init(this)
         OkWebSocketClientManager.init()
         Cube.onCreate(this)
     }

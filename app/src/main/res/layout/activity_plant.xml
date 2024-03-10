@@ -16,6 +16,7 @@
         tools:context=".module.plant.PlantAct">
 
         <Button
+            android:id="@+id/btnShop"
             android:text="@string/shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

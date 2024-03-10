@@ -15,4 +15,8 @@ object API {
     const val USER_GET_INFO = "/user/getInfo"
 
     const val PET_CREATE = "/pet/create"
+
+    const val MARKET_SEEDS = "/market/seeds"
+    const val MARKET_FERTILIZERS = "/market/fertilizer"
+    const val MARKET_PURCHASE = "/market/purchase"
 }

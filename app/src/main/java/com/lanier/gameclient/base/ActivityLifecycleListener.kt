@@ -5,10 +5,11 @@ import android.app.Application
 import android.os.Bundle
 import java.lang.ref.WeakReference
 
-class OnActivityListener : Application.ActivityLifecycleCallbacks {
+class ActivityLifecycleListener : Application.ActivityLifecycleCallbacks {
 
     private var foreActivityCount : Int = 0
-    private var topActivity: WeakReference<Activity>? = null
+    var topActivity: WeakReference<Activity>? = null
+        private set
 
     private val lifecycleListeners = mutableListOf<OnLifecycleListener>()
 
