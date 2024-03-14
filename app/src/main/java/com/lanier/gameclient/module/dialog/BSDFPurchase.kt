@@ -86,6 +86,7 @@ class BSDFPurchase(
                     it.marketItemId,
                     number
                 )
+                dismiss()
             }
         }
     }

@@ -47,7 +47,12 @@ class ShopFragment(
         mAdapter.setOnItemClickListener { _, _, position ->
             mAdapter.getItemOrNull(position)?.let {
                 BSDFPurchase.show(parentFragmentManager, it) { type, propId, marketItemId, number ->
-                    viewmodel.purchase(type, propId, marketItemId, number)
+                    viewmodel.purchase(
+                        type,
+                        propId,
+                        number,
+                        marketItemId,
+                    )
                 }
             } ?: "商品暂时不可购买哦".toast()
         }
