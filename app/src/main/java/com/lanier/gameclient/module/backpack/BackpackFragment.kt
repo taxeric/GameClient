@@ -1,6 +1,7 @@
 package com.lanier.gameclient.module.backpack
 
 import android.os.Bundle
+import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseFra
@@ -29,6 +30,12 @@ class BackpackFragment(
     private val tabs = mutableListOf<PropType>()
     private var currentTabIndex = 0
 
+    private val mAdapter by lazy {
+        BackpackAdapter()
+    }
+
+    private val vm by viewModels<BackpackVM>()
+
     override fun onBind() {
         tabs.add(PropType(typeId = PropType.SEED, typeName = getString(R.string.seed)))
         tabs.add(PropType(typeId = PropType.FERTILIZER, typeName = getString(R.string.fertilizer)))
@@ -39,6 +46,20 @@ class BackpackFragment(
                 addTab(mTab)
             }
             addOnTabSelectedListener(onTabSelectedList)
+        }
+        vm.backpackList.observe(this) {
+            if (it.first) {
+                mAdapter.setList(it.second)
+            } else {
+                mAdapter.addData(it.second)
+            }
+        }
+    }
+
+    private fun handleTabIndex() {
+        when (currentTabIndex) {
+            0 -> vm.seeds()
+            1 -> vm.fertilizer()
         }
     }
 
@@ -54,6 +75,7 @@ class BackpackFragment(
             if (currentTabIndex != index) {
                 currentTabIndex = index
             }
+            handleTabIndex()
         }
 
         override fun onTabUnselected(tab: TabLayout.Tab?) {

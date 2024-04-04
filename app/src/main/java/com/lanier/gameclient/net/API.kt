@@ -16,6 +16,9 @@ object API {
 
     const val PET_CREATE = "/pet/create"
 
+    const val BACKPACK_SEEDS = "/backpack/seeds"
+    const val BACKPACK_FERTILIZERS = "/backpack/fertilizer"
+
     const val MARKET_SEEDS = "/market/seeds"
     const val MARKET_FERTILIZERS = "/market/fertilizer"
     const val MARKET_PURCHASE = "/market/purchase"
