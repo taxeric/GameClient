@@ -7,4 +7,7 @@ data class MarketItem(
     val price: Int = 0,
     val type: Int = 0,
     val realPropId: Int = 0,
-)
+) {
+
+    fun priceStr() = price.toString()
+}
