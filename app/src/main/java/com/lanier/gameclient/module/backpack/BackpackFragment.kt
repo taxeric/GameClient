@@ -48,10 +48,16 @@ class BackpackFragment(
             addOnTabSelectedListener(onTabSelectedList)
         }
         vm.backpackList.observe(this) {
-            if (it.first) {
+            if (vm.refresh) {
                 mAdapter.setList(it.second)
             } else {
                 mAdapter.addData(it.second)
+            }
+
+            if (it.first) {
+                mAdapter.loadMoreModule.loadMoreComplete()
+            } else {
+                mAdapter.loadMoreModule.loadMoreEnd()
             }
         }
     }

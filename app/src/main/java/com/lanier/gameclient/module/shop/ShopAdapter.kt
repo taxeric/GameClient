@@ -16,7 +16,7 @@ class ShopAdapter : BaseQuickAdapter<MarketItem, BaseDataBindingHolder<RvItemMar
     R.layout.rv_item_market
 ), LoadMoreModule {
     override fun convert(holder: BaseDataBindingHolder<RvItemMarketBinding>, item: MarketItem) {
-        holder.dataBinding?.tvName?.text = item.name
+        holder.dataBinding?.item = item
     }
 
     override fun addLoadMoreModule(baseQuickAdapter: BaseQuickAdapter<*, *>): BaseLoadMoreModule {

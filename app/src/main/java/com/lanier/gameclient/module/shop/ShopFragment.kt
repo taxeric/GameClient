@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseFra
+import com.lanier.gameclient.base.ViewStatus
 import com.lanier.gameclient.databinding.FragmentShopBinding
 import com.lanier.gameclient.ext.toast
 import com.lanier.gameclient.module.dialog.BSDFPurchase
@@ -60,17 +61,26 @@ class ShopFragment(
         viewbinding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
         viewmodel.datas.observe(this) {
             if (viewmodel.refresh) {
-                mAdapter.setList(it)
+                mAdapter.setList(it.second)
             } else {
-                mAdapter.addData(it)
+                mAdapter.addData(it.second)
             }
-            if (it.isNotEmpty()) {
+            if (it.first) {
                 mAdapter.loadMoreModule.loadMoreComplete()
             } else {
                 mAdapter.loadMoreModule.loadMoreEnd()
             }
         }
-        viewmodel.viewStatus.observe(this) {
+        viewmodel.purchaseResult.observe(viewLifecycleOwner) {
+            if (it.second.isNotEmpty()) {
+                it.second.toast()
+            }
+        }
+        viewmodel.viewStatus.observe(viewLifecycleOwner) {
+            when (it) {
+                ViewStatus.Completed -> { dismissLoading() }
+                ViewStatus.Loading -> { showLoading() }
+            }
         }
     }
 

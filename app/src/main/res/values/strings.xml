@@ -12,6 +12,7 @@
     <string name="lets_start">Let\'s start ! </string>
     <string name="OK">OK !</string>
     <string name="shop">商店</string>
+    <string name="backpack">背包</string>
     <string name="food">食物</string>
     <string name="toiletries">洗浴用品</string>
     <string name="drug">药品</string>
@@ -19,4 +20,6 @@
     <string name="fertilizer">肥料</string>
     <string name="purchase">购买</string>
     <string name="purchase_number">购买数量</string>
+    <string name="operation">操作</string>
+    <string name="harvest">收获</string>
 </resources>

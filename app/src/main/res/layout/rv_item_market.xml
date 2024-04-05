@@ -20,10 +20,22 @@
 
         <TextView
             android:id="@+id/tvName"
+            android:text="@{item.name}"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
             android:gravity="start"
             android:layout_width="80dp"
             android:layout_height="40dp" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:text="@{item.priceStr()}"
+            android:layout_marginTop="4dp"
+            android:textSize="11sp"
+            android:gravity="center_horizontal"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>
