@@ -2,11 +2,13 @@ package com.lanier.gameclient.module.plant
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.lanier.gameclient.base.BaseViewModel
 import com.lanier.gameclient.base.data.UserData
 import com.lanier.gameclient.entity.BaseListModel
 import com.lanier.gameclient.entity.Land
 import com.lanier.gameclient.entity.Backpack
+import com.lanier.gameclient.entity.SeedStageInfo
 import com.lanier.gameclient.entity.dto.PlantDto
 import com.lanier.gameclient.ext.launchSafe
 import com.lanier.gameclient.net.API
@@ -36,6 +38,17 @@ class PlantVM : BaseViewModel() {
                 .add("petId", UserData.curPet.petId.toString())
                 .build()
             successGetCatch<BaseListModel<Land>>(API.LAND_INFO, requestBody)?.let {
+                it.list.forEach { land ->
+                    val jacksonMapper = jacksonObjectMapper()
+                    land.seed?.let { seed ->
+                        val ssi = try {
+                            jacksonMapper.readValue(seed.stageInfo, SeedStageInfo::class.java)
+                        } catch (e: Exception) {
+                            null
+                        }
+                        seed.seedStageInfo = ssi
+                    }
+                }
                 _landInfos.postValue(it.list)
             }
         }

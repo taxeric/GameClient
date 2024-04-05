@@ -2,6 +2,8 @@ package com.lanier.gameclient.module.plant
 
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseAct
 import com.lanier.gameclient.base.ViewStatus
@@ -13,7 +15,6 @@ import com.lanier.gameclient.ext.startAct
 import com.lanier.gameclient.module.dialog.BSDFLandOperation
 import com.lanier.gameclient.module.dialog.LandOperationListener
 import com.lanier.gameclient.module.shop.ShopAct
-import kotlin.random.Random
 
 class PlantAct(
     override val layoutId: Int = R.layout.activity_plant
@@ -39,6 +40,7 @@ class PlantAct(
 
         viewbinding.recyclerView.adapter = mAdapter
         viewbinding.recyclerView.layoutManager = LinearLayoutManager(this)
+        viewbinding.recyclerView.addItemDecoration(MaterialDividerItemDecoration(this, RecyclerView.VERTICAL))
         vm.landInfos.observe(this) {
             mAdapter.setList(it)
         }

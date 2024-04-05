@@ -38,4 +38,7 @@ data class Seed(
      * 内容为{stageName:[阶段1, 阶段2, 阶段3],stageSustainTime:[1800, 1800, 1800]}, 分别表示阶段名称 & 阶段持续时间, 数组长度一一对应
      */
     val stageInfo: String = "",
-)
+) {
+
+    var seedStageInfo: SeedStageInfo? = null
+}
