@@ -1,11 +1,10 @@
-package org.lanier.gameserve2.entity
+package com.lanier.gameclient.entity
 
 /**
  * Created by 黄瓜
  * Date 2024/2/14 17:34
  */
 data class PlantLevel(
-    val levelId: Int = 0,
 
     /**
      * 等级
