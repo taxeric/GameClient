@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.lanier.gameclient.module.dialog.CommonLoading
 
 abstract class BaseFra<VDB : ViewDataBinding> : Fragment() {
 
     protected lateinit var viewbinding: VDB
+
+    private var loadingDialog : CommonLoading? = null
 
     abstract val layoutId: Int
 
@@ -29,6 +32,16 @@ abstract class BaseFra<VDB : ViewDataBinding> : Fragment() {
         initData()
     }
 
-    open protected fun onBind() {}
-    open protected fun initData() {}
+    protected open fun onBind() {}
+    protected open fun initData() {}
+
+    protected open fun showLoading() {
+        loadingDialog?.dismiss()
+        loadingDialog = CommonLoading.newInstance()
+        loadingDialog?.show(parentFragmentManager, CommonLoading::class.java.simpleName)
+    }
+
+    protected open fun dismissLoading() {
+        loadingDialog?.dismiss()
+    }
 }
