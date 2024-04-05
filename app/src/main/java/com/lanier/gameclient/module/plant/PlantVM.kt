@@ -53,7 +53,7 @@ class PlantVM : BaseViewModel() {
                 bpkId,
                 seedId
             )
-            successPostCatch<Boolean, PlantDto>(API.LAND_HARVEST, dto)?.let {
+            successPostCatch<Boolean, PlantDto>(API.LAND_PLANT, dto)?.let {
                 if (it) {
                     getLandsData()
                 }

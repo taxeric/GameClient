@@ -15,11 +15,37 @@
         android:layout_height="match_parent"
         tools:context=".module.plant.PlantAct">
 
-        <Button
-            android:id="@+id/btnShop"
-            android:text="@string/shop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"/>
+
+            <com.lanier.gameclient.ui.CircleProgressView
+                android:id="@+id/progressView"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                android:layout_width="56dp"
+                android:layout_height="56dp"/>
+
+            <Button
+                android:id="@+id/btnShop"
+                android:text="@string/shop"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/progressView"
+                app:layout_constraintTop_toTopOf="@+id/progressView"
+                app:layout_constraintStart_toEndOf="@+id/progressView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

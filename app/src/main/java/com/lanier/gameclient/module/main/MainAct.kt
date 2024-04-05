@@ -3,6 +3,7 @@ package com.lanier.gameclient.module.main
 import androidx.activity.viewModels
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseAct
+import com.lanier.gameclient.base.ViewStatus
 import com.lanier.gameclient.client.OkWebSocketClientManager
 import com.lanier.gameclient.databinding.ActivityMainBinding
 import com.lanier.gameclient.ext.launchSafe
@@ -42,5 +43,14 @@ class MainAct(
         viewbinding.btnPlant.setOnClickListener {
             startAct<PlantAct> {  }
         }
+
+        vm.viewStatus.observe(this) {
+            when (it) {
+                ViewStatus.Completed -> { dismissLoading() }
+                ViewStatus.Loading -> { showLoading() }
+            }
+        }
+
+        vm.getPetInfo()
     }
 }

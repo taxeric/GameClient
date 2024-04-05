@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseAct
 import com.lanier.gameclient.base.ViewStatus
+import com.lanier.gameclient.base.data.UserData
 import com.lanier.gameclient.databinding.ActivityPlantBinding
 import com.lanier.gameclient.entity.Land
 import com.lanier.gameclient.entity.Backpack
@@ -12,6 +13,7 @@ import com.lanier.gameclient.ext.startAct
 import com.lanier.gameclient.module.dialog.BSDFLandOperation
 import com.lanier.gameclient.module.dialog.LandOperationListener
 import com.lanier.gameclient.module.shop.ShopAct
+import kotlin.random.Random
 
 class PlantAct(
     override val layoutId: Int = R.layout.activity_plant
@@ -47,7 +49,16 @@ class PlantAct(
             }
         }
 
+        bindUser()
         vm.getLandsData()
+    }
+
+    private fun bindUser() {
+        viewbinding.tvName.text = UserData.curPet.name
+        viewbinding.progressView.maxProgress(UserData.curPet.currentLevel.expRequired)
+        UserData.curPet.currentPlantExp?.let {
+            viewbinding.progressView.progress(it, "Lv.${UserData.curPet.currentLevel.plantLevel}")
+        }
     }
 
     private fun operationAction(land: Land) {
@@ -59,7 +70,7 @@ class PlantAct(
 
             override fun plant(item: Backpack?) {
                 item?.let {
-                    vm.plant(land.landId, land.bpkId, it.realPropId)
+                    vm.plant(land.landId, it.bpkId, it.realPropId)
                 }
             }
 
