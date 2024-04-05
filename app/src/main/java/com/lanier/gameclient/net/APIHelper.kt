@@ -5,9 +5,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import java.io.IOException
 
@@ -193,6 +195,25 @@ object APIHelper {
         body: RequestBody?
     ) : String? = withContext(Dispatchers.IO) {
         val request = buildUrl(url)
+            .method("POST", body)
+            .build()
+        val response = client.newCall(request).execute()
+        if (response.isSuccessful.not()) {
+            return@withContext null
+        }
+        val respBody = response.body?.string()
+        if (respBody.isNullOrEmpty()) {
+            return@withContext null
+        }
+        return@withContext respBody
+    }
+
+    suspend inline fun postJsonSyncNotHandle(
+        url: String,
+        body: RequestBody
+    ) : String? = withContext(Dispatchers.IO) {
+        val request = buildUrl(url)
+            .addHeader("Content-Type", "application/json")
             .method("POST", body)
             .build()
         val response = client.newCall(request).execute()

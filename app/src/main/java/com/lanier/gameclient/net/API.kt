@@ -22,4 +22,9 @@ object API {
     const val MARKET_SEEDS = "/market/seeds"
     const val MARKET_FERTILIZERS = "/market/fertilizer"
     const val MARKET_PURCHASE = "/market/purchase"
+
+    const val LAND_INFO = "/land/get-info"
+    const val LAND_PLANT = "/land/plant"
+//    const val LAND_USE_FERTILIZER = "/land/use-fertilizer"
+    const val LAND_HARVEST = "/land/harvest"
 }

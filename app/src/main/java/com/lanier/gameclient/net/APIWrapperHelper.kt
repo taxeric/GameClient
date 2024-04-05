@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.lanier.gameclient.entity.BaseEntity
 import com.lanier.gameclient.entity.BaseListModel
+import com.lanier.gameclient.ext.toReqJsonBody
 import com.lanier.gameclient.ext.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -84,7 +85,7 @@ object APIWrapperHelper {
             append(url)
             if (requestBody.size != 0) {
                 append("?")
-                for (index in 0 until requestBody.size - 1) {
+                repeat(requestBody.size) { index ->
                     append(requestBody.name(index))
                     append("=")
                     append(requestBody.value(index))
@@ -104,6 +105,31 @@ object APIWrapperHelper {
             return null
         }
         return mData.data
+    }
+
+    suspend inline fun <reified T> getSyncWrapper(
+        url: String,
+        requestBody: FormBody,
+    ): BaseEntity<T> {
+        val tempUrl = buildString {
+            append(url)
+            if (requestBody.size != 0) {
+                append("?")
+                repeat(requestBody.size) { index ->
+                    append(requestBody.name(index))
+                    append("=")
+                    append(requestBody.value(index))
+                    if (index != requestBody.size - 1) {
+                        append("&")
+                    }
+                }
+            }
+        }
+        val json = withContext(Dispatchers.IO) { APIHelper.getSyncNotHandle(tempUrl) }
+        println(">>>> $json")
+        val jacksonMapper = jacksonObjectMapper()
+        val type = object : TypeReference<BaseEntity<T>>() {}
+        return jacksonMapper.readValue(json, type)
     }
 
     suspend inline fun <reified T> postSync(
@@ -128,6 +154,17 @@ object APIWrapperHelper {
         requestBody: RequestBody? = null,
     ): BaseEntity<T> {
         val json = withContext(Dispatchers.IO) { APIHelper.postSyncNotHandle(url, requestBody) }
+        println(">>>> $json")
+        val jacksonMapper = jacksonObjectMapper()
+        val type = object : TypeReference<BaseEntity<T>>() {}
+        return jacksonMapper.readValue(json, type)
+    }
+
+    suspend inline fun <reified T, D> postSync(
+        url: String,
+        data: D,
+    ): BaseEntity<T> {
+        val json = withContext(Dispatchers.IO) { APIHelper.postJsonSyncNotHandle(url, data.toReqJsonBody()) }
         println(">>>> $json")
         val jacksonMapper = jacksonObjectMapper()
         val type = object : TypeReference<BaseEntity<T>>() {}
