@@ -15,6 +15,7 @@ object API {
     const val USER_GET_INFO = "/user/getInfo"
 
     const val PET_CREATE = "/pet/create"
+    const val PET_INFO = "/pet/info"
 
     const val BACKPACK_SEEDS = "/backpack/seeds"
     const val BACKPACK_FERTILIZERS = "/backpack/fertilizer"
