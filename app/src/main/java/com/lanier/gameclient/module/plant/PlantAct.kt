@@ -11,7 +11,10 @@ import com.lanier.gameclient.base.data.UserData
 import com.lanier.gameclient.databinding.ActivityPlantBinding
 import com.lanier.gameclient.entity.Land
 import com.lanier.gameclient.entity.Backpack
+import com.lanier.gameclient.ext.collect
+import com.lanier.gameclient.ext.launchSafe
 import com.lanier.gameclient.ext.startAct
+import com.lanier.gameclient.flowbus.event.Purchase
 import com.lanier.gameclient.module.dialog.BSDFLandOperation
 import com.lanier.gameclient.module.dialog.LandOperationListener
 import com.lanier.gameclient.module.shop.ShopAct
@@ -57,7 +60,13 @@ class PlantAct(
                 ViewStatus.Loading -> { showLoading() }
             }
         }
-
+        launchSafe {
+            collect<Purchase> {
+                vm.getPlantInfo {
+                    bindUser()
+                }
+            }
+        }
         bindUser()
         vm.getLandsData()
     }

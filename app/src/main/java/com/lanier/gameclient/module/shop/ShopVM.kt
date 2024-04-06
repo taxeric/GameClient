@@ -73,7 +73,7 @@ class ShopVM : BaseViewModel() {
                 .add("quantity", quantity.toString())
                 .add("marketItemId", marketItemId.toString())
                 .build()
-            successPostCatch<Boolean>(API.MARKET_PURCHASE, requestBody)?.let {
+            successPostCatch<Boolean>(API.MARKET_PURCHASE, requestBody, showToast = true)?.let {
                 _purchaseResult.value = Pair(it, if (it) "购买成功~" else "商品暂时不能购买哦~")
             }
             setStatus(ViewStatus.Completed)

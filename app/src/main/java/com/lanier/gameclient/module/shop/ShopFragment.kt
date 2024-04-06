@@ -8,7 +8,9 @@ import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseFra
 import com.lanier.gameclient.base.ViewStatus
 import com.lanier.gameclient.databinding.FragmentShopBinding
+import com.lanier.gameclient.ext.post
 import com.lanier.gameclient.ext.toast
+import com.lanier.gameclient.flowbus.event.Purchase
 import com.lanier.gameclient.module.dialog.BSDFPurchase
 import org.lanier.gameserve2.entity.PropType
 
@@ -73,6 +75,7 @@ class ShopFragment(
         }
         viewmodel.purchaseResult.observe(viewLifecycleOwner) {
             if (it.second.isNotEmpty()) {
+                Purchase().post()
                 it.second.toast()
             }
         }
