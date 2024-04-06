@@ -57,6 +57,7 @@ class PlantAct(
 
     private fun bindUser() {
         viewbinding.tvName.text = UserData.curPet.name
+        viewbinding.tvCoins.text = "Coins : ${UserData.curPet.coin}"
         viewbinding.progressView.maxProgress(UserData.curPet.currentLevel.expRequired)
         UserData.curPet.currentPlantExp?.let {
             viewbinding.progressView.progress(it, "Lv.${UserData.curPet.currentLevel.plantLevel}")

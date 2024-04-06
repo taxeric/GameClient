@@ -55,6 +55,7 @@ class BSDFLandOperation : BottomSheetDialogFragment() {
                 } else if (binding.rbFertilizer.isChecked) {
                     operationListener?.useFertilizer(item)
                 }
+                dismiss()
             }
         }
     }
@@ -75,19 +76,23 @@ class BSDFLandOperation : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (canHarvest) {
-            binding.rbHarvest.visible()
+            binding.btnHarvest.visible()
         }
 
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbSeed -> vm.seeds()
                 R.id.rbFertilizer -> vm.fertilizer()
-                R.id.rbHarvest -> operationListener?.harvest()
             }
         }
 
         binding.recyclerView.adapter = mAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+
+        binding.btnHarvest.setOnClickListener {
+            operationListener?.harvest()
+            dismiss()
+        }
 
         vm.backpackList.observe(viewLifecycleOwner) {
             if (vm.refresh) {
