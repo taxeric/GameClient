@@ -48,4 +48,17 @@ object UserData {
     fun notifyPet(pet: Pet) {
         curPet = pet.copy(def = false)
     }
+
+    fun notifyPetPlantInfo(pet: Pet) {
+        curPet = curPet.copy(
+            def = false,
+            currentPlantExp = pet.currentPlantExp,
+            lackExp = pet.lackExp,
+            coin = pet.coin,
+            unlockedLandCount = pet.unlockedLandCount,
+            usedLandCount = pet.usedLandCount,
+            maxLandCount = pet.maxLandCount,
+            currentLevel = pet.currentLevel
+        )
+    }
 }

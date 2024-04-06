@@ -44,6 +44,13 @@ class PlantAct(
         vm.landInfos.observe(this) {
             mAdapter.setList(it)
         }
+        vm.harvestResult.observe(this) {
+            if (it) {
+                vm.getPlantInfo {
+                    bindUser()
+                }
+            }
+        }
         vm.viewStatus.observe(this) {
             when (it) {
                 ViewStatus.Completed -> { dismissLoading() }

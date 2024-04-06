@@ -11,7 +11,9 @@ import com.lanier.gameclient.base.data.UserData
 import com.lanier.gameclient.entity.BaseListModel
 import com.lanier.gameclient.entity.Land
 import com.lanier.gameclient.entity.Backpack
+import com.lanier.gameclient.entity.BaseEntity
 import com.lanier.gameclient.entity.LandCropStageInfo
+import com.lanier.gameclient.entity.Pet
 import com.lanier.gameclient.entity.SeedStageInfo
 import com.lanier.gameclient.entity.dto.PlantDto
 import com.lanier.gameclient.ext.launchSafe
@@ -25,7 +27,7 @@ class PlantVM : BaseViewModel() {
     val landInfos: LiveData<List<Land>> = _landInfos
 
     private val _harvestResult = MutableLiveData<Boolean>()
-    val harvest: LiveData<Boolean> = _harvestResult
+    val harvestResult: LiveData<Boolean> = _harvestResult
 
     private val _backpackList = MutableLiveData<Pair<Boolean, List<Backpack>>>()
     val backpackList : LiveData<Pair<Boolean, List<Backpack>>> = _backpackList
@@ -47,6 +49,20 @@ class PlantVM : BaseViewModel() {
                 processLandPlants(it.list)
                 setStatus(ViewStatus.Completed)
                 _landInfos.postValue(it.list)
+            }
+        }
+    }
+
+    fun getPlantInfo(
+        onSuccess: (() -> Unit)? = null
+    ) {
+        launchSafe {
+            val requestBody = FormBody.Builder()
+                .add("petId", UserData.curPet.petId.toString())
+                .build()
+            successGetCatch<Pet>(API.PET_PLANT_INFO, requestBody, showLoading = false)?.let {
+                UserData.notifyPetPlantInfo(it)
+                onSuccess?.invoke()
             }
         }
     }
@@ -75,11 +91,11 @@ class PlantVM : BaseViewModel() {
         landId: Int
     ) {
         launchSafe {
-            val dto = PlantDto(
-                UserData.curPet.petId!!,
-                landId,
-            )
-            successPostCatch<Boolean, PlantDto>(API.LAND_HARVEST, dto)?.let {
+            val body = FormBody.Builder()
+                .add("petId", UserData.curPet.petId.toString())
+                .add("landId", landId.toString())
+                .build()
+            successPostCatch<Boolean>(API.LAND_HARVEST, body)?.let {
                 _harvestResult.postValue(it)
             }
         }
