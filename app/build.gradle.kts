@@ -80,4 +80,9 @@ dependencies {
 
     val jacksonVersion = "2.16.1"
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+
+    //coil
+    val coilVersion = "2.4.0"
+    implementation("io.coil-kt:coil:$coilVersion")
+    implementation("io.coil-kt:coil-gif:$coilVersion")
 }
