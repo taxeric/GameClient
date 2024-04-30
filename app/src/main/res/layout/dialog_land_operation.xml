@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_corner_12_top">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rbSeed"
+                        android:checked="true"
+                        android:text="@string/seed"
+                        android:gravity="center"
+                        android:background="@drawable/land_operation_rb_style"
+                        android:button="@null"
+                        android:layout_width="80dp"
+                        android:layout_height="36dp"/>
+
+                    <RadioButton
+                        android:id="@+id/rbFertilizer"
+                        android:text="@string/fertilizer"
+                        android:gravity="center"
+                        android:background="@drawable/land_operation_rb_style"
+                        android:button="@null"
+                        android:layout_marginStart="8dp"
+                        android:layout_width="80dp"
+                        android:layout_height="36dp"/>
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/btnHarvest"
+                    android:visibility="invisible"
+                    android:text="@string/harvest"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_marginStart="8dp"
+                    tools:visibility="visible"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

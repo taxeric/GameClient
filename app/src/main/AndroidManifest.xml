@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".module.shop.ShopAct"
+            android:exported="false" />
+        <activity
+            android:name=".module.plant.PlantAct"
+            android:exported="false" />
+        <activity
             android:name=".module.edit_pet.EditPetAct"
             android:exported="false" />
         <activity

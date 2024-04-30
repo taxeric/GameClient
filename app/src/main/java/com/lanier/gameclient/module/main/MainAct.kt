@@ -1,26 +1,28 @@
 package com.lanier.gameclient.module.main
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.activity.viewModels
 import com.lanier.gameclient.R
+import com.lanier.gameclient.base.BaseAct
+import com.lanier.gameclient.base.ViewStatus
 import com.lanier.gameclient.client.OkWebSocketClientManager
+import com.lanier.gameclient.databinding.ActivityMainBinding
 import com.lanier.gameclient.ext.launchSafe
 import com.lanier.gameclient.ext.listenAllPreferences
+import com.lanier.gameclient.ext.startAct
+import com.lanier.gameclient.module.plant.PlantAct
 import com.lanier.gameclient.preference.getBooleanValue
 import com.lanier.gameclient.preference.getStringValue
 
-class MainAct : AppCompatActivity() {
+class MainAct(
+    override val layoutId: Int = R.layout.activity_main
+) : BaseAct<ActivityMainBinding>() {
 
     private var cacheUrl = ""
     private var isChecked = false
 
     private val vm by viewModels<MainVM>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+    override fun onBind() {
         listenAllPreferences {
             cacheUrl = it.getStringValue("websocket_url")
             isChecked = it.getBooleanValue("save_websocket_url")
@@ -37,5 +39,18 @@ class MainAct : AppCompatActivity() {
                 }
             }
         }
+
+        viewbinding.btnPlant.setOnClickListener {
+            startAct<PlantAct> {  }
+        }
+
+        vm.viewStatus.observe(this) {
+            when (it) {
+                ViewStatus.Completed -> { dismissLoading() }
+                ViewStatus.Loading -> { showLoading() }
+            }
+        }
+
+        vm.getPetInfo()
     }
 }

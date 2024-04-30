@@ -11,8 +11,8 @@ import okhttp3.FormBody
 
 class LoginVM : ViewModel() {
 
-    var inputAccount = MutableLiveData("")
-    var inputPassword = MutableLiveData("")
+    var inputAccount = MutableLiveData("lanier")
+    var inputPassword = MutableLiveData("123456")
 
     val checkError = MutableLiveData("")
 
@@ -23,7 +23,9 @@ class LoginVM : ViewModel() {
         if (checkPassed().not()) {
             return
         }
-        launchSafe {
+        launchSafe(
+            error = {onFailure.invoke(it.message)}
+        ) {
             val requestBody = FormBody.Builder()
                 .add("account", inputAccount.value!!)
                 .add("password", inputPassword.value!!)

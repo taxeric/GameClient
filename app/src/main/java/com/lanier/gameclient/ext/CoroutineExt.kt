@@ -46,7 +46,9 @@ fun CoroutineScope.launchSafe(
 
 fun ViewModel.launchSafe(
     start: CoroutineStart = CoroutineStart.DEFAULT,
-    error: ((Throwable) -> Unit)? = null,
+    error: ((Throwable) -> Unit)? = {
+        println(">>>> error ${it.message}")
+    },
     block: suspend CoroutineScope.() -> Unit,
 ) {
     viewModelScope.launch(
