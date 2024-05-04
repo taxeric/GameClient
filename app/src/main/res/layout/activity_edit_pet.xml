@@ -24,8 +24,18 @@
             android:layout_width="256dp"
             android:layout_height="256dp"/>
 
+        <ImageView
+            android:id="@+id/ivSpirit"
+            app:layout_constraintStart_toStartOf="@+id/ivEgg"
+            app:layout_constraintEnd_toEndOf="@+id/ivEgg"
+            app:layout_constraintTop_toTopOf="@+id/ivEgg"
+            app:layout_constraintBottom_toBottomOf="@+id/ivEgg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etSetNicknameLayout"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -46,6 +56,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOK"
+            android:visibility="invisible"
             android:text="@string/lets_start"
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="36dp"

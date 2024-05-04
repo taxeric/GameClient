@@ -4,6 +4,7 @@ import android.app.Application
 import com.lanier.gameclient.base.ActivityLifecycleListener
 import com.lanier.gameclient.base.ActivityManager
 import com.lanier.gameclient.client.OkWebSocketClientManager
+import com.lanier.gameclient.utils.CoilUtil
 import com.lanier.gameclient.utils.Cube
 
 /**
@@ -17,5 +18,6 @@ class BaseApp : Application() {
         ActivityManager.init(this)
         OkWebSocketClientManager.init()
         Cube.onCreate(this)
+        CoilUtil.init(this)
     }
 }

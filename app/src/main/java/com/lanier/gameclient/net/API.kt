@@ -29,4 +29,6 @@ object API {
     const val LAND_PLANT = "/land/plant"
 //    const val LAND_USE_FERTILIZER = "/land/use-fertilizer"
     const val LAND_HARVEST = "/land/harvest"
+
+    const val SPIRIT_RANDOM = "/spirit/random"
 }
