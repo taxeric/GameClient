@@ -1,12 +1,10 @@
 package com.lanier.gameclient.module.edit_pet
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.lanier.gameclient.base.BaseViewModel
 import com.lanier.gameclient.base.data.UserData
 import com.lanier.gameclient.entity.Pet
 import com.lanier.gameclient.entity.spirit.Spirit
-import com.lanier.gameclient.entity.spirit.SpiritAction
 import com.lanier.gameclient.ext.launchSafe
 import com.lanier.gameclient.net.API
 import com.lanier.gameclient.net.APIWrapperHelper
@@ -16,7 +14,7 @@ import okhttp3.FormBody
 class EditPetVM : BaseViewModel() {
 
     var nickname = MutableLiveData("")
-    var spiritAction = MutableStateFlow(SpiritAction.dd)
+    var spiritAction = MutableStateFlow("")
 
     fun create(
         onSuccess: () -> Unit,
@@ -53,9 +51,7 @@ class EditPetVM : BaseViewModel() {
                 requestBody = FormBody.Builder().build()
             )?.let {
                 nickname.value = it.name
-                it.actions?.let { actions ->
-                    spiritAction.tryEmit(actions)
-                }
+                spiritAction.tryEmit(it.actions)
             }
         }
     }

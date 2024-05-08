@@ -2,6 +2,8 @@ package com.lanier.gameclient.module.edit_pet
 
 import androidx.activity.viewModels
 import coil.load
+import com.fasterxml.jackson.module.kotlin.contains
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.florent37.viewanimator.ViewAnimator
 import com.lanier.gameclient.R
 import com.lanier.gameclient.base.BaseAct
@@ -26,18 +28,23 @@ class EditPetAct(
         viewbinding.viewmodel = vm
 
         launchSafe {
-            vm.spiritAction.collect {
-                if (it.def.not() && it.idle.isNotEmpty()) {
-                    viewbinding.ivEgg.load(it.idle)
-                    animator = ViewAnimator
-                        .animate(viewbinding.etSetNicknameLayout, viewbinding.btnOK)
-                        .alpha(0f, 1f)
-                        .duration(800L)
-                        .onStart {
-                            viewbinding.etSetNicknameLayout.visible()
-                            viewbinding.btnOK.visible()
-                        }
-                        .start()
+            vm.spiritAction.collect { actions ->
+                val mapper = jacksonObjectMapper()
+                val trees = mapper.readTree(actions)
+                if (trees.contains("idle")) {
+                    val idle = trees.get("idle").asText()
+                    if (idle.isNotEmpty()) {
+                        viewbinding.ivEgg.load(idle)
+                        animator = ViewAnimator
+                            .animate(viewbinding.etSetNicknameLayout, viewbinding.btnOK)
+                            .alpha(0f, 1f)
+                            .duration(800L)
+                            .onStart {
+                                viewbinding.etSetNicknameLayout.visible()
+                                viewbinding.btnOK.visible()
+                            }
+                            .start()
+                    }
                 }
             }
         }

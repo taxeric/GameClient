@@ -10,5 +10,5 @@ data class Spirit(
     val id: Int = -1,
     val name: String = "",
     val preview: String = "",
-    val actions: SpiritAction? = null
+    val actions: String = "",
 )
